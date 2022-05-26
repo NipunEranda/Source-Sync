@@ -87,7 +87,7 @@ app.get('/github/callback', (req, res) => {
 })
 
 app.get('/', homepage.get);
-app.post('/signout', (req, res) => signout(req, res));
+app.get('/signout', (req, res) => signout(req, res));
 
 app.listen(config.port, () => {
     utils.log(`Server listening on port ${config.port}.`);
