@@ -87,13 +87,14 @@ app.get('/github/callback', (req, res) => {
 })
 
 app.get('/', homepage.get);
+app.post('/signout', (req, res) => signout(req, res));
 
 app.listen(config.port, () => {
     utils.log(`Server listening on port ${config.port}.`);
 });
 
 function signout(req, res) {
-    req.session.username = null;
+    req.session.token = null;
     res.redirect('/signin');
 }
 
