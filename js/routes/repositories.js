@@ -4,13 +4,13 @@ const github = require('../services/github');
 
 exports.get = async (req, res) => {
   try {
-    const organizations = await github.getOrganizations(req, res);
-    res.render('organizations', {
+    const repositories = await github.getRepositories(req.query.org);
+    res.render('repositories', {
       'github_client_id': config.github.credentials.client,
       'user': req.session.user,
       'time': utils.formatDateTime(new Date()),
-      'organizations': organizations,
-      'organizations_json': JSON.stringify(organizations),
+      'repositories': repositories,
+      'repositories_json': JSON.stringify(repositories),
     });
   } catch (e) {
     console.log(e);
