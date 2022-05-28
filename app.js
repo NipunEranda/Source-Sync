@@ -30,13 +30,14 @@ app.use((req, res, next) => {
 
 app.use(session({
     key: 'SID',
-    secret: 'W6pTJ69hiYszSxIGXWci',
+    secret: 'W13DK24lwnzaqhLBDYde',
     store: new MySQLStore(config.mysql.credentials),
     resave: false,
     saveUninitialized: false,
 }));
 
 app.use(ensureSignedIn);
+app.use(flash());
 
 app.use((req, res, next) => {
     utils.log(`${req.method} ${req.url} ${req.session.username || ''}`);
@@ -48,6 +49,8 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 // setup the local variables available to all views
 app.use((req, res, next) => {
+    res.locals.success_messages = req.flash('success_messages');
+    res.locals.error_messages = req.flash('error_messages');
     res.locals.path = req.path; // used for 404
     res.locals.user = req.session.user;
     res.locals.token = req.session.token;

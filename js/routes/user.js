@@ -13,7 +13,6 @@ exports.signInCallBack = (req, res) => {
 
     // The req.query object has the query params that were sent to this route.
     const requestToken = req.query.code
-    console.log(requestToken);
 
     axios({
         method: 'post',

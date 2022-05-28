@@ -5,6 +5,11 @@ const github = require('../services/github');
 exports.get = async (req, res) => {
   try {
     const repositories = await github.getRepositories(req.query.org);
+    for (let repository in repositories) {
+      const l = await github.getLanguagesInRepository(repositories[repository].languages_url);
+      repositories[repository].languages = l;
+    };
+    //req.flash('error_messages', 'Repositories Retrieved!');
     res.render('repositories', {
       'github_client_id': config.github.credentials.client,
       'user': req.session.user,

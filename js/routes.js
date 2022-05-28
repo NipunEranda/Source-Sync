@@ -3,6 +3,8 @@ const user = require('./routes/user');
 const profile = require('./routes/profile');
 const organizations = require('./routes/organizations');
 const repositories = require('./routes/repositories');
+const dashboard = require('./routes/dashboard');
+const backup = require('./routes/backup');
 
 const routes = () => {
     return {
@@ -14,6 +16,8 @@ const routes = () => {
             '/profile': profile.get,
             '/repositories': repositories.get,
             '/organizations': organizations.get,
+            '/dashboard': dashboard.get,
+            '/backup': backup.get
         },
         post: {
 
