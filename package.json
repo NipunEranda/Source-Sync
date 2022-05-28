@@ -4,8 +4,7 @@
   "description": "Source sync system between different systems",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -r dotenv/config app.js",
-    "start": "node app.js",
+    "start": "nodemon -r dotenv/config app.js",
     "zip": "rm cs.zip; zip -r cs.zip ./data/ ./js/ ./package.json ./public/ ./views/"
   },
   "repository": {
