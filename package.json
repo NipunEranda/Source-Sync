@@ -17,6 +17,7 @@
     "url": "https://github.com/NipunEranda/Source-Sync/issues"
   },
   "dependencies": {
+    "@octokit/rest": "^18.12.0",
     "axios": "^0.27.2",
     "body-parser": "^1.19.1",
     "connect-flash": "^0.1.1",

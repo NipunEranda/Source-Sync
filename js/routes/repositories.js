@@ -1,15 +1,16 @@
 const utils = require('../utils');
 const config = require('../../config');
-const axios = require('axios');
-const moment = require('moment');
+const github = require('../services/github');
 
 exports.get = async (req, res) => {
   try {
-    res.render('profile', {
+    const repositories = await github.getRepositories(req.query.org);
+    res.render('repositories', {
       'github_client_id': config.github.credentials.client,
       'user': req.session.user,
       'time': utils.formatDateTime(new Date()),
-      'joinedDate': `Joined ${moment(new Date(req.session.user.created_at)).format('MMMM')}, ${new Date(req.session.user.created_at).getFullYear()}`,
+      'repositories': repositories,
+      'repositories_json': JSON.stringify(repositories),
     });
   } catch (e) {
     console.log(e);

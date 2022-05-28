@@ -16,7 +16,12 @@ config.mysql.credentials = {
 //GITHUB AUTH
 config.github.credentials = {
     client: process.env.GITHUB_AUTH_CLIENT,
-    secret: process.env.GITHUB_AUTH_SECRET
+    secret: process.env.GITHUB_AUTH_SECRET,
+    token: process.env.GITHUB_TOKEN
 };
+
+config.github.api = {
+    url: process.env.GITHUB_API_URL
+}
 
 module.exports = config;

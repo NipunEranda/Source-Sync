@@ -1,6 +1,5 @@
 const utils = require('../utils');
 const config = require('../../config');
-const axios = require('axios');
 
 exports.get = async (req, res) => {
   try {
