@@ -6,7 +6,7 @@ const MySQLStore = require('express-mysql-session')(session);
 const flash = require('connect-flash');
 const config = require('./config');
 const utils = require('./js/utils');
-const routes = require('./js/routes/routes');
+const routes = require('./js/routes');
 
 const app = express();
 
