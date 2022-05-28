@@ -1,9 +1,96 @@
 <div id="app">
-    {{repositories}}
+    <div class="container">
+        <div class="row" style="padding:0;margin:0;margin-top: 50px;">
+            <div v-for="repository in repositories" class="col-md-4" style="cursor: pointer;"
+                @mouseover="showDescription = repository.id" @mouseleave="showDescription = 0">
+                <div class="card text-white mb-3 center" style="max-width: 20rem;border-radius:25px;">
+                    <div class="card-header" v-text="repository.full_name"></div>
+                    <div class="card-body">
+                        <h5 class="card-title" v-text="repository.name"></h5>
+                        <p v-if="showDescription === repository.id" class="card-text" v-text="repository.description">
+                        </p>
+                        <div class="mb-1">
+                            <span v-if="repository.visibility == 'private'" class="badge badge-pill badge-secondary"
+                                v-text="repository.visibility"></span>
+                            <span v-if="repository.visibility == 'public'" class="badge badge-pill badge-primary"
+                                v-text="repository.visibility"></span>
+                            <span class="badge badge-pill badge-warning"
+                                v-text="getLicenseType(repository.license)"></span>
+                        </div>
+                        <div class="mb-1">
+                            <span v-for="language in Object.keys(repository.languages)"
+                                class="badge badge-pill badge-info mr-2" v-text="language"></span>
+                        </div>
+                        <div class="mb-1">
+                            <span class="badge badge-pill badge-danger mr-2" v-text="'Not Synced'"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="sync-section">
+            <div class="row">
+                <div class="col-md-4" style="padding:20px">
+                    <Button class="btn btn-success w-100">Sync Local</Button>
+                </div>
+                <div class="col-md-4" style="padding:20px">
+                    <Button class="btn btn-danger w-100">Configure S3</Button>
+                </div>
+                <div class="col-md-4" style="padding:20px">
+                    <Button class="btn btn-success w-100">Sync AWS CodeCommit</Button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+<style scoped>
+    .col-md-4 {
+        margin-bottom: 50px;
+    }
+
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .card {
+        background-color: #313131;
+    }
+
+    .badge {
+        padding: 5px 8px 5px 8px;
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.min.js"
+    integrity="sha512-/Q6t3CASm04EliI1QyIDAA/nDo9R8FQ/BULoUFyN4n/BDdyIxeH7u++Z+eobdmr11gG5D/6nPFyDlnisDwhpYA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.min.js"
+    integrity="sha512-XdUZ5nrNkVySQBnnM5vzDqHai823Spoq1W3pJoQwomQja+o4Nw0Ew1ppxo5bhF2vMug6sfibhKWcNJsG8Vj9tg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <script>
-    $(document).ready(function(){
-        console.log({{{repositories_json}}});
+    var app = new Vue({
+        el: '#app',
+        data: {
+            showDescription: null,
+            repositories: {{{ repositories_json }}},
+        },
+    methods: {
+        getLicenseType(license){
+            if (license) {
+                if (Object.keys(license).length > 0) {
+                    return license.spdx_id;
+                } else
+                    return null;
+            } else
+                return null;
+        }
+    },
+    mounted: function() {
+        console.log(this.repositories);
+    }
     });
 </script>

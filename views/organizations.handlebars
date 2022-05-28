@@ -1,17 +1,14 @@
 <div id="app">
     <div class="container">
-        <div class="row" style="margin-top: 50px;">
+        <div class="row" style="padding:0;margin:0;margin-top: 50px;">
             {{#each organizations}}
-            <div class="col-md-4" style="margin-bottom: 20px;">
-                <div class="card bg-light mb-3 center" style="max-width: 18rem;border:none;border-radius: 100%;">
+            <div class="col-md-4" style="cursor: pointer;" onclick="location.href='/repositories?org={{this.login}}'">
+                <div class="card text-white mb-3 center" style="max-width: 20rem;border-radius:25px;">
                     <div class="card-body">
-                        <img src="{{this.avatar_url}}" alt="" width="100%" style="border-radius: 100%;">
-                    </div>
-                    <div class="overlay" id="{{this.id}}-viewBtn" onmouseover="viewButtonOnOver({{this.id}})"
-                        onmouseleave="viewButtonOnLeave({{this.id}})" style="border-radius: 100%;" onclick="location.href='/repositories?org={{this.login}}'">
-                        <div class="text">
-                            <label for="">{{this.login}}</label>
-                        </div>
+                        <img class="center" src="{{this.avatar_url}}" width="120" height="120"
+                            style="border-radius: 100px; margin-bottom:20px;">
+                        <h5 class="card-title text-center">{{this.login}}</h5>
+                        <p class="card-text text-center">{{this.description}}</p>
                     </div>
                 </div>
             </div>
@@ -21,51 +18,21 @@
 </div>
 
 <script>
-    $(document).ready(function () {
-        console.log({{{ organizations_json }}});
-    });
-    function viewButtonOnOver(element) {
-        $(`#${element}-viewBtn`).css('opacity', 1);
-    }
-    function viewButtonOnLeave(element) {
-        $(`#${element}-viewBtn`).css('opacity', 0);
-    }
+    console.log({{{ organizations_json }}});
 </script>
 
-<style>
-    .card-title {
-        color: black !important;
+<style scoped>
+    .col-md-4 {
+        margin-bottom: 50px;
     }
 
-    .overlay {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 100%;
-        width: 100%;
-        opacity: 0;
-        transition: .5s ease;
-        background-color: rgba(0, 0, 0, 0.8);
-        cursor: pointer;
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    .container .overlay {
-        opacity: 0;
-    }
-
-    .text {
-        color: white;
-        font-size: 20px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-        text-align: center;
-        width: fit-content;
-        vertical-align: text-top;
+    .card{
+        background-color: #313131;
     }
 </style>

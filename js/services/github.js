@@ -19,18 +19,28 @@ exports.getOrganizations = async (req, res) => {
         return response.data;
     } catch (e) {
         console.log(e);
-        return e;
+        return null;
     }
 }
 
 exports.getRepositories = async (org) => {
     let response = null;
     try {
-        console.log(`${config.github.api.url}/orgs/${org}/repos`);
         response = await axios.get(`${config.github.api.url}/orgs/${org}/repos`, { headers: { Authorization: 'token ' + config.github.credentials.token, Accept: 'application/vnd.github.v3+json' } });
-        console.log(response);
         return response.data;
     } catch (e) {
         console.log(e);
+        return null;
+    }
+}
+
+exports.getLanguagesInRepository = async (link) => {
+    let response = null;
+    try{
+        response = await axios.get(link, { headers: { Authorization: 'token ' + config.github.credentials.token, Accept: 'application/vnd.github.v3+json' } });
+        return response.data;
+    }catch(e){
+        console.log(e);
+        return null;
     }
 }

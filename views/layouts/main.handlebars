@@ -32,13 +32,13 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Dashboard</a>
+                        <a class="nav-link" href="/dashboard">Dashboard</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/organizations">Organizations</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Backup</a>
+                        <a class="nav-link" href="/backup">Backup</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
@@ -168,3 +168,17 @@
         display: block !important;
     }
 </style>
+
+<script>
+    $(document).ready(function(){
+        $.each($('.nav-link'), function(key, value){
+            if(location.href.split('/')[location.href.split('/').length - 1] === value.text.toLowerCase()){
+                $(value).addClass('active');
+            }else if(location.href.split('/')[location.href.split('/').length - 1] === 'profile'){
+                (key === $('.nav-link').length - 1) ? $(value).addClass('active') : null;
+            }else{
+                $(value).removeClass('active');
+            }
+        });
+    });
+</script>
