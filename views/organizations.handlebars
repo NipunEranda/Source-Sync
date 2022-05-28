@@ -1,0 +1,31 @@
+<div id="app">
+    <div class="container">
+        <div class="row">
+            {{#each organizations}}
+            <div class="col-md-4" style="margin-bottom: 20px;">
+                <div class="card bg-light mb-3 center" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <img src="{{this.avatar_url}}" alt="" width="100%">
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        console.log({{{ organizations_json }}});
+    });
+</script>
+
+<style>
+    .card-title {
+        color: black !important;
+    }
+    .container{
+        margin-top: 75px;
+    }
+
+</style>

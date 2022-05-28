@@ -1,11 +1,24 @@
 const axios = require('axios');
+const config = require('../../config');
 
-exports.getUserDetails = async(req, res) => {
-    const config = {
-        headers: {
-            Authorization: 'token ' + req.session.token
-        }
+exports.getUserDetails = async (req, res) => {
+    let response = null;
+    try {
+        response = await axios.get(`${config.github.api.url}/user`, { headers: { Authorization: 'token ' + config.github.credentials.token } });
+        return response.data;
+    } catch (e) {
+        console.log(e);
+        return e;
     }
-    const response = await axios.get('https://api.github.com/user', config);
-    return response.data;
+}
+
+exports.getOrganizations = async (req, res) => {
+    let response = null;
+    try{
+        response = await axios.get(`${config.github.api.url}/user/orgs`, { headers: { Authorization: 'token ' + config.github.credentials.token } });
+        return response.data;
+    }catch(e){
+        console.log(e);
+        return e;
+    }
 }
