@@ -22,8 +22,17 @@ const signInCallBack = (req, res) => {
             accept: 'application/json'
         }
     }).then((response) => {
-        req.session.token = response.data.access_token
-        res.redirect('/');
+        const config = {
+            headers: {
+                Authorization: 'token ' + response.data.access_token
+            }
+        }
+        axios.get('https://api.github.com/user', config).then(user => {
+            console.log(user.data);
+            req.session.user = user.data;
+            req.session.token = response.data.access_token
+            res.redirect('/');
+        });
     })
 }
 
@@ -51,5 +60,4 @@ const routes = () => {
         }
     };
 }
-
 module.exports = routes;

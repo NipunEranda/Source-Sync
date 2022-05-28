@@ -49,7 +49,7 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 // setup the local variables available to all views
 app.use((req, res, next) => {
     res.locals.path = req.path; // used for 404
-    res.locals.username = req.session.username;
+    res.locals.user = req.session.user;
     res.locals.token = req.session.token;
     next();
 });
