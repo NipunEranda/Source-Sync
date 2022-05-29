@@ -24,7 +24,7 @@ const routes = () => {
             '/settings': settings.get
         },
         post: {
-
+            '/settings': settings.save
         },
         put: {
 

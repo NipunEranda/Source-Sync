@@ -60,7 +60,14 @@ app.use((req, res, next) => {
 //Routes
 Object.keys(routes()).forEach(route => {
     Object.keys(routes()[route]).forEach(r => {
-        app.get(r, routes()[route][r]);
+        if(route === 'get')
+            app.get(r, routes()[route][r]);
+        else if(route === 'post')
+            app.post(r, routes()[route][r]);
+        else if(route === 'put')
+            app.put(r, routes()[route][r]);
+        else
+            app.delete(r, routes()[route][r]);
     });
 });
 

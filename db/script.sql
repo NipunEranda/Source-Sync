@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS `source_sync`;
 
-CREATE DATABASE IF NOT EXISTS pms DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE IF NOT EXISTS source_sync DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `source_sync`;
 
 CREATE TABLE usr_User(
@@ -13,6 +13,7 @@ CREATE TABLE usr_User(
 CREATE TABLE usr_Settings(
     id BIGINT(200) NOT NULL AUTO_INCREMENT,
     userId BIGINT(200) NOT NULL,
+    github_personal_token BIGINT(200) DEFAULT NULL,
     s3_bucket_name VARCHAR(255) DEFAULT NULL,
     s3_bucket_class VARCHAR(255) DEFAULT NULL,
     aws_access_key TEXT DEFAULT NULL,
