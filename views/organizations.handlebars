@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row" style="padding:0;margin:0;margin-top: 50px;">
             {{#each organizations}}
-            <div class="col-md-4" style="cursor: pointer;" onclick="location.href='/repositories?org={{this.login}}'">
+            <div class="col-md-4" style="cursor: pointer;" onclick="location.href='/organization-repositories?org={{this.login}}'">
                 <div class="card text-white mb-3 center" style="max-width: 20rem;border-radius:25px;">
                     <div class="card-body">
                         <img class="center" src="{{this.avatar_url}}" width="120" height="120"

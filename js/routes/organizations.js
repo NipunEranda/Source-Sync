@@ -1,6 +1,6 @@
 const utils = require('../utils');
 const config = require('../../config');
-const github = require('../services/github');
+const github = require('../services/github.service');
 
 exports.get = async (req, res) => {
   try {
