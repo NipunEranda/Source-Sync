@@ -1,3 +1,115 @@
 <div id="app">
-    Settings
+    <div class="settings-container mt-5 p-5 col-md-6 center clearfix">
+        <div class="form-group">
+            <label class="form-text-name">Github Personal Access Token</label>
+            <div class="input-group mb-4 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-check" aria-hidden="true" style="color: #1e9e74;"></i>
+                    </div>
+                </div>
+                <input type="password" class="form-control form-control-sm input-fields"
+                    placeholder="XXXXXXXXXXXXXXXXXXXXXXX" v-model="settings.git_personal_token"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-text-name">AWS Access Key</label>
+            <div class="input-group mb-4 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-check" aria-hidden="true" style="color: #1e9e74;"></i>
+                    </div>
+                </div>
+                <input type="password" class="form-control form-control-sm input-fields"
+                    placeholder="XXXXXXXXXXXXXXXXXXXXXXX" v-model="settings.aws_access_key"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-text-name">AWS Access Secret</label>
+            <div class="input-group mb-4 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-check" aria-hidden="true" style="color: #1e9e74;"></i>
+                    </div>
+                </div>
+                <input type="password" class="form-control form-control-sm input-fields"
+                    placeholder="XXXXXXXXXXXXXXXXXXXXXXX" v-model="settings.aws_access_secret"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-text-name">AWS SSH Key</label>
+            <div class="input-group mb-4 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-check" aria-hidden="true" style="color: #1e9e74;"></i>
+                    </div>
+                </div>
+                <input type="password" class="form-control form-control-sm input-fields"
+                    placeholder="XXXXXXXXXXXXXXXXXXXXXXX" v-model="settings.aws_ssh_key"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-text-name">S3 Bucket Name</label>
+            <div class="input-group mb-4 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-check" aria-hidden="true" style="color: #1e9e74;"></i>
+                    </div>
+                </div>
+                <input type="text" class="form-control form-control-sm"
+                    placeholder="Example-bucket" v-model="settings.s3_bucket_name"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-text-name">S3 Bucket Class</label>
+            <div class="input-group mb-4 mr-sm-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fa fa-check" aria-hidden="true" style="color: #1e9e74;"></i>
+                    </div>
+                </div>
+                <input type="text" class="form-control form-control-sm"
+                    placeholder="Standard" v-model="settings.s3_bucket_class"/>
+            </div>
+        </div>
+        <Button class="btn btn-primary float-right pl-5 pr-5" @click="save()">Save</Button>
+    </div>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.25.0/axios.min.js"
+    integrity="sha512-/Q6t3CASm04EliI1QyIDAA/nDo9R8FQ/BULoUFyN4n/BDdyIxeH7u++Z+eobdmr11gG5D/6nPFyDlnisDwhpYA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.min.js"
+    integrity="sha512-XdUZ5nrNkVySQBnnM5vzDqHai823Spoq1W3pJoQwomQja+o4Nw0Ew1ppxo5bhF2vMug6sfibhKWcNJsG8Vj9tg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            settings: {
+                git_personal_token: '',
+                aws_access_key: '',
+                aws_access_secret: '',
+                aws_ssh_key: '',
+                s3_bucket_name: '',
+                s3_bucket_class: ''
+            }
+        },
+        methods: {
+            save: async function(){
+                const response = await axios.post('/settings', this.settings);
+                location.href='/settings';
+            }
+        }
+    });
+</script>
+
+<style>
+    .settings-container {
+        background-color: #2c2c2c;
+    }
+
+    .form-text-name {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .input-fields {
+        letter-spacing: 5px;
+    }
+</style>
