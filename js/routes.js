@@ -5,6 +5,7 @@ const organizations = require('./routes/organizations');
 const repositories = require('./routes/repositories');
 const dashboard = require('./routes/dashboard');
 const backup = require('./routes/backup');
+const settings = require('./routes/settings');
 
 const routes = () => {
     return {
@@ -17,7 +18,8 @@ const routes = () => {
             '/repositories': repositories.get,
             '/organizations': organizations.get,
             '/dashboard': dashboard.get,
-            '/backup': backup.get
+            '/backup': backup.get,
+            '/settings': settings.get
         },
         post: {
 
