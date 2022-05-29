@@ -4,11 +4,11 @@ const github = require('../services/github.service');
 
 exports.get = async (req, res) => {
   try {
-    const repositories = await github.getRepositories(req.query.org);
-    for (let repository in repositories) {
-      const l = await github.getLanguagesInRepository(repositories[repository].languages_url);
-      repositories[repository].languages = l;
-    };
+    const repositories = await github.getOrgRepositories(req.query.org);
+    await Promise.all(repositories.map(async (repository, i) => {
+      const l = await github.getLanguagesInRepository(repository.languages_url);
+      repositories[i].languages = l;
+    }));
     //req.flash('error_messages', 'Repositories Retrieved!');
     res.render('organization-repositories', {
       'github_client_id': config.github.credentials.client,

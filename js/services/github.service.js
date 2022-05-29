@@ -23,10 +23,21 @@ exports.getOrganizations = async (req, res) => {
     }
 }
 
-exports.getRepositories = async (org) => {
+exports.getOrgRepositories = async (org) => {
     let response = null;
     try {
         response = await axios.get(`${config.github.api.url}/orgs/${org}/repos`, { headers: { Authorization: 'token ' + config.github.credentials.token, Accept: 'application/vnd.github.v3+json' } });
+        return response.data;
+    } catch (e) {
+        console.log(e);
+        return null;
+    }
+}
+
+exports.getPersonalRepositories = async () => {
+    let response = null;
+    try {
+        response = await axios.get(`${config.github.api.url}/user/repos?visibility=all&per_page=100`, { headers: { Authorization: 'token ' + config.github.credentials.token, Accept: 'application/vnd.github.v3+json' } });
         return response.data;
     } catch (e) {
         console.log(e);
